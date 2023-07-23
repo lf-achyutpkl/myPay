@@ -13,6 +13,7 @@ const Button: FunctionComponent<ButtonProps> = (props) => {
 
   return (
     <TouchableOpacity
+      testID='button-touchable'
       onPress={onPress}
       disabled={disabled}
       style={[styles.button, disabled && styles.disabled]}

@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react-native';
 import { Currency, Route } from '../../src/types';
-import useSendMoney from '../../src/screens/SendMoneyScreen/hooks/useSendMoney';
+import useSendMoney from '../../src/hooks/useSendMoney';
 
 describe('useSendMoney', () => {
   describe('convertAmountWithRate', () => {

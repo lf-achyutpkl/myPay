@@ -1,33 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Alert, StyleSheet, View } from 'react-native';
 
 import RateInfo from './commons/RateInfo';
 import CurrencyAmountSelector from '../../components/CurrencyAmountSelector';
-import { Currency, Route } from '../../types';
+import { Currency } from '../../types';
 
-import useSendMoney from './hooks/useSendMoney';
+import useSendMoney from '../../hooks/useSendMoney';
 import TimeInfo from './commons/TimeInfo';
 import Button from '../../components/Button/Button';
 
 const SendMoneyScreen = () => {
-  const { getSelectedRoute, convertAmountWithRate } = useSendMoney();
-  const [selectedCurrencyFrom, setSelectedCurrencyFrom] = useState<Currency>(
-    Currency.AED,
-  );
-  const [selectedCurrencyTo, setSelectedCurrencyTo] = useState<Currency>(
-    Currency.PKR,
-  );
-  const [amountFrom, setAmountFrom] = useState<number>();
-  const [amountTo, setAmountTo] = useState<number>();
-  const [selectedRoute, setSelectedRoute] = useState<Route | undefined>();
-
-  useEffect(() => {
-    setAmountFrom(0);
-    setAmountTo(0);
-    const route = getSelectedRoute(selectedCurrencyFrom, selectedCurrencyTo);
-    setSelectedRoute(route);
-  }, [selectedCurrencyTo]);
+  const {
+    selectedRoute,
+    setAmountFrom,
+    setAmountTo,
+    selectedCurrencyFrom,
+    selectedCurrencyTo,
+    setSelectedCurrencyFrom,
+    setSelectedCurrencyTo,
+    amountFrom,
+    amountTo,
+    convertAmountWithRate,
+  } = useSendMoney();
 
   const onAmountFromChange = (value: number) => {
     if (!selectedRoute || isNaN(value)) return;
@@ -38,6 +33,7 @@ const SendMoneyScreen = () => {
 
   const onAmountToChange = (value: number) => {
     if (!selectedRoute || isNaN(value)) return;
+
     setAmountTo(value);
     setAmountFrom(convertAmountWithRate(selectedRoute, value, true));
   };

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Currency } from '../../types';
 import { colors, shades } from '../../commons/theme';
+import Flag from '../Flag';
 
 type CurrencySelectorProps = {
   label: string;
@@ -30,9 +31,12 @@ const CurrencySelector: FunctionComponent<CurrencySelectorProps> = (props) => {
   >([]);
 
   useEffect(() => {
-    const dropDownOptions =
-      currencies?.map((currency) => ({ label: currency, value: currency })) ||
-      [];
+    const dropDownOptions = currencies?.map((currency) => ({
+      label: currency,
+      value: currency,
+      icon: () => <Flag currency={currency} />,
+    }));
+    [];
     setCurrencyOptions(dropDownOptions);
   }, [currencies]);
 
@@ -43,15 +47,18 @@ const CurrencySelector: FunctionComponent<CurrencySelectorProps> = (props) => {
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.label}>{label}</Text>
+        <Text testID='currency-label' style={styles.label}>
+          {label}
+        </Text>
       </View>
       <DropDownPicker
+        testID='currency-selector'
         disabled={disabled}
         style={styles.dropdownContainer}
         labelStyle={styles.dropdownLabel}
         placeholderStyle={styles.dropdownPlaceholder}
         arrowIconContainerStyle={disabled ? styles.hide : styles.show}
-        placeholder='select currency'
+        placeholder='select'
         open={open}
         value={currency!}
         items={currencyOptions!}
