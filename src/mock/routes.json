@@ -1,0 +1,38 @@
+[
+  {
+    "currencyPair": "AED/PHP",
+    "currencyFrom": "AED",
+    "currencyTo": "PHP",
+    "maxAmount": 1000,
+    "rate": 14.9,
+    "fee": {
+      "amount": 0,
+      "percentage": 5
+    },
+    "processingTime": "1 Hour"
+  },
+  {
+    "currencyPair": "AED/NPR",
+    "currencyFrom": "AED",
+    "currencyTo": "NPR",
+    "maxAmount": 1000,
+    "rate": 35.7,
+    "fee": {
+      "amount": 0,
+      "percentage": 6
+    },
+    "processingTime": "2 Hour"
+  },
+  {
+    "currencyPair": "AED/PKR",
+    "currencyFrom": "AED",
+    "currencyTo": "PKR",
+    "maxAmount": 1000,
+    "rate": 77.88,
+    "fee": {
+      "amount": 0,
+      "percentage": 7
+    },
+    "processingTime": "3 Hour"
+  }
+]
