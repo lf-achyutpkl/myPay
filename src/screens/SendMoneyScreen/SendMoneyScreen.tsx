@@ -14,7 +14,7 @@ type SendMoneyScreenProps = {
   testID: string;
 };
 
-const SendMoneyScreen: FunctionComponent = ({ testID }) => {
+const SendMoneyScreen: FunctionComponent<SendMoneyScreenProps> = ({ testID }) => {
   const {
     selectedRoute,
     setAmountFrom,
