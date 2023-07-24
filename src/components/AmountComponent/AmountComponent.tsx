@@ -8,13 +8,15 @@ type AmountComponentProps = {
   editable?: boolean;
   placeholder?: string;
   onChangeAmount: (value: number) => void;
+  testID?: string
 };
 
 const AmountComponent: FunctionComponent<AmountComponentProps> = (props) => {
-  const { amount,  onChangeAmount, placeholder, editable } = props;
+  const { amount,  onChangeAmount, placeholder, editable, testID } = props;
 
   return (
     <TextInput
+      testID={`${testID}#textInput`}
       editable={editable}
       value={amount?.toString()}
       placeholder={placeholder}

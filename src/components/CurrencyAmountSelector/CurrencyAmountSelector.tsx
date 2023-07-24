@@ -14,6 +14,7 @@ type CurrencyAmountSelectorProps = {
   selectedCurrency?: Currency;
   amount?: number;
   isAmountEditable?: boolean;
+  testID?: string;
 };
 
 const CurrencyAmountSelector: FunctionComponent<CurrencyAmountSelectorProps> = (
@@ -29,12 +30,14 @@ const CurrencyAmountSelector: FunctionComponent<CurrencyAmountSelectorProps> = (
     placeholder,
     onSelectCurrency,
     isAmountEditable = true,
+    testID,
   } = props;
 
   return (
     <View style={styles.container}>
       <View style={styles.currencyContainer}>
         <CurrencySelector
+          testID={`${testID}#currencySelector`}
           label={label}
           currencies={currencies}
           selectedCurrency={selectedCurrency}
@@ -44,6 +47,7 @@ const CurrencyAmountSelector: FunctionComponent<CurrencyAmountSelectorProps> = (
       </View>
       <View style={styles.amountContainer}>
         <AmountComponent
+          testID={`${testID}#amountComponent`}
           editable={isAmountEditable}
           amount={amount}
           placeholder={placeholder}

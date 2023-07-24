@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import * as flags from '../../assets/flags';
 import { Currency } from '../../types';
 
-const Flag = (props: { currency: Currency }) => {
+type FlagProps = {
+  currency: Currency;
+};
+
+const Flag: FunctionComponent<FlagProps> = (props: { currency: Currency }) => {  
   const Icon = flags[`${props.currency}`];
 
   if (!Icon) {

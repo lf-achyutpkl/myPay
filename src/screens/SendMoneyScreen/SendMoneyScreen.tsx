@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, FunctionComponent } from 'react';
 
 import { Alert, StyleSheet, View } from 'react-native';
 
@@ -10,7 +10,11 @@ import useSendMoney from '../../hooks/useSendMoney';
 import TimeInfo from './commons/TimeInfo';
 import Button from '../../components/Button/Button';
 
-const SendMoneyScreen = () => {
+type SendMoneyScreenProps = {
+  testID: string;
+};
+
+const SendMoneyScreen: FunctionComponent = ({ testID }) => {
   const {
     selectedRoute,
     setAmountFrom,
@@ -39,8 +43,9 @@ const SendMoneyScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={`${testID}-container`}>
       <CurrencyAmountSelector
+        testID={`${testID}#currencyAmountSelector_AmountFrom`}
         label={'You send exactly'}
         placeholder='amount'
         isCurrencySelectorDisabled={true}
@@ -52,6 +57,7 @@ const SendMoneyScreen = () => {
       />
       <RateInfo route={selectedRoute!} amount={amountFrom!} />
       <CurrencyAmountSelector
+        testID={`${testID}#currencyAmountSelector_AmountTo`}
         label={'Recipient gets'}
         placeholder='amount'
         currencies={[Currency.NPR, Currency.PHP, Currency.PKR]}
@@ -62,6 +68,7 @@ const SendMoneyScreen = () => {
       />
       <TimeInfo route={selectedRoute!} />
       <Button
+        testID={`${testID}#currencyAmountSelector_AmountFrom`}
         disabled={!amountTo}
         label='Start transfer'
         onPress={() => {

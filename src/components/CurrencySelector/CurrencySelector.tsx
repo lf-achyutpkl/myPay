@@ -11,6 +11,7 @@ type CurrencySelectorProps = {
   currencies: Currency[];
   disabled?: boolean;
   selectedCurrency?: Currency;
+  testID?: string;
 };
 
 const CurrencySelector: FunctionComponent<CurrencySelectorProps> = (props) => {
@@ -20,6 +21,7 @@ const CurrencySelector: FunctionComponent<CurrencySelectorProps> = (props) => {
     currencies,
     disabled = false,
     selectedCurrency,
+    testID,
   } = props;
 
   const [open, setOpen] = useState(false);
@@ -47,12 +49,12 @@ const CurrencySelector: FunctionComponent<CurrencySelectorProps> = (props) => {
   return (
     <>
       <View style={styles.container}>
-        <Text testID='currency-label' style={styles.label}>
+        <Text testID={`${testID}#dropdownLabel`} style={styles.label}>
           {label}
         </Text>
       </View>
       <DropDownPicker
-        testID='currency-selector'
+      testID={`${testID}#currencySelector`}
         disabled={disabled}
         style={styles.dropdownContainer}
         labelStyle={styles.dropdownLabel}

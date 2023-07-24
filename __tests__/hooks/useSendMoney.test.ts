@@ -1,9 +1,11 @@
-import { renderHook, act } from '@testing-library/react-native';
+import { renderHook, cleanup } from '@testing-library/react-native';
 import { Currency, Route } from '../../src/types';
 import useSendMoney from '../../src/hooks/useSendMoney';
 
 describe('useSendMoney', () => {
   describe('convertAmountWithRate', () => {
+    afterEach(cleanup);
+
     test('should convert amount with rate with base rate', () => {
       const route: Route = {
         currencyPair: 'AED/PHP',

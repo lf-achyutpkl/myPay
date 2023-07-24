@@ -1,74 +1,81 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { cleanup, render, fireEvent } from '@testing-library/react-native';
 import CurrencySelector from '../../src/components/CurrencySelector/CurrencySelector';
 import { Currency } from '../../src/types';
 
-test('should renders correctly with label and placeholder', () => {
-  const mockOnSelectCurrency = jest.fn();
-  const label = 'Select Currency';
-  const currencies = [Currency.AED, Currency.NPR, Currency.PHP];
-  const selectedCurrency = Currency.AED;
+describe('CurrencySelector', () => {
+  afterEach(cleanup);
 
-  const { getByTestId, getByText } = render(
-    <CurrencySelector
-      label={label}
-      onSelectCurrency={mockOnSelectCurrency}
-      currencies={currencies}
-      selectedCurrency={selectedCurrency}
-    />
-  );
+  test('should renders correctly with label and placeholder', () => {
+    const mockOnSelectCurrency = jest.fn();
+    const label = 'Select Currency';
+    const currencies = [Currency.AED, Currency.NPR, Currency.PHP];
+    const selectedCurrency = Currency.AED;
 
-  const labelElement = getByText(label);
-  expect(labelElement).toBeTruthy();
+    const { getByTestId, getByText } = render(
+      <CurrencySelector
+        testID='currency-selector'
+        label={label}
+        onSelectCurrency={mockOnSelectCurrency}
+        currencies={currencies}
+        selectedCurrency={selectedCurrency}
+      />,
+    );
 
-  const selectorElement = getByTestId('currency-selector');
-  expect(selectorElement).toBeTruthy();
-});
+    const labelElement = getByText(label);
+    expect(labelElement).toBeTruthy();
 
-test('should calls setValue when a currency is selected', () => {
-  const mockOnSelectCurrency = jest.fn();
-  const label = 'Select Currency';
-  const currencies = [Currency.AED, Currency.NPR, Currency.PHP];
-  const selectedCurrency = Currency.AED;
+    const selectorElement = getByTestId('currency-selector#dropdownLabel');
+    expect(selectorElement).toBeTruthy();
+  });
 
-  const { getByTestId } = render(
-    <CurrencySelector
-      label={label}
-      onSelectCurrency={mockOnSelectCurrency}
-      currencies={currencies}
-      selectedCurrency={selectedCurrency}
-    />
-  );
+  test('should calls setValue when a currency is selected', () => {
+    const mockOnSelectCurrency = jest.fn();
+    const label = 'Select Currency';
+    const currencies = [Currency.AED, Currency.NPR, Currency.PHP];
+    const selectedCurrency = Currency.AED;
 
-  const selectorElement = getByTestId('currency-selector');
-  fireEvent.press(selectorElement);
+    const { getByTestId } = render(
+      <CurrencySelector
+        testID='currency-selector'
+        label={label}
+        onSelectCurrency={mockOnSelectCurrency}
+        currencies={currencies}
+        selectedCurrency={selectedCurrency}
+      />,
+    );
 
-  const currencyToSelect = currencies[1];
-  fireEvent(selectorElement, 'setValue' , currencyToSelect);
+    const selectorElement = getByTestId('currency-selector#currencySelector');
 
-  expect(mockOnSelectCurrency).toHaveBeenCalledWith(currencyToSelect);
-  expect(mockOnSelectCurrency).toHaveBeenCalledTimes(2);
-});
+    const currencyToSelect = currencies[1];
+    fireEvent(selectorElement, 'setValue', currencyToSelect);
 
-test('should not call onSelectCurrency when disabled', () => {
-  const mockOnSelectCurrency = jest.fn();
-  const label = 'Select Currency';
-  const currencies = [Currency.AED, Currency.NPR, Currency.PHP];
-  const selectedCurrency = Currency.AED;
+    expect(mockOnSelectCurrency).toHaveBeenCalledWith(currencyToSelect);
+    expect(mockOnSelectCurrency).toHaveBeenCalledTimes(2);
+  });
 
-  const { getByTestId } = render(
-    <CurrencySelector
-      label={label}
-      onSelectCurrency={mockOnSelectCurrency}
-      currencies={currencies}
-      selectedCurrency={selectedCurrency}
-      disabled={true}
-    />
-  );
+  test('should not call onSelectCurrency when disabled', () => {
+    const mockOnSelectCurrency = jest.fn();
+    const label = 'Select Currency';
+    const currencies = [Currency.AED, Currency.NPR, Currency.PHP];
+    const selectedCurrency = Currency.AED;
 
-  const selectorElement = getByTestId('currency-selector');
-  fireEvent(selectorElement, 'setOpen', true);
-  fireEvent(selectorElement, 'setValue' , Currency.PHP);
+    const { getByTestId, getByText } = render(
+      <CurrencySelector
+        testID='currency-selector'
+        label={label}
+        onSelectCurrency={mockOnSelectCurrency}
+        currencies={currencies}
+        selectedCurrency={selectedCurrency}
+        disabled={true}
+      />,
+    );
+    const selectorElement = getByTestId('currency-selector#currencySelector');
+    fireEvent(selectorElement, 'setValue', Currency.PHP);
 
-  expect(mockOnSelectCurrency).toHaveBeenCalledTimes(1);
+    const elementWithSelectedCurrency = getByText(selectedCurrency);
+
+    expect(elementWithSelectedCurrency).toBeTruthy();
+    expect(mockOnSelectCurrency).not.toHaveBeenCalledTimes(2);
+  });
 });

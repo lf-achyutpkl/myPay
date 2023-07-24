@@ -6,19 +6,21 @@ type ButtonProps = {
   onPress: () => void;
   label: string;
   disabled?: boolean;
+  testID?: string;
 };
 
 const Button: FunctionComponent<ButtonProps> = (props) => {
-  const { onPress, label, disabled = false } = props;
+  const { onPress, label, disabled = false, testID } = props;
 
   return (
     <TouchableOpacity
-      testID='button-touchable'
+      testID={`${testID}#button`}
       onPress={onPress}
       disabled={disabled}
-      style={[styles.button, disabled && styles.disabled]}
-    >
-      <Text style={styles.label}>{label}</Text>
+      style={[styles.button, disabled && styles.disabled]}>
+      <Text style={styles.label} testID={`${testID}#button-label`}>
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
   },
   disabled: {
     backgroundColor: '#edf2f5',
-  }
+  },
 });
 
 export default Button;

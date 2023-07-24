@@ -1,7 +1,9 @@
 export const colors = {
   primary: '#6753ff',
   secondary: '#2f80ed',
-  borderColor: '#979393',
+  borderColor: '#c9c6c6',
+  primaryText: '#000000',
+  secondaryText: '#5c5d61',
 };
 
 export const shades = {
