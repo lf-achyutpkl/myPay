@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Currency } from '../../types';
 import { colors, shades } from '../../commons/theme';
-import Flag from '../Flag';
+import ImageSVG from '../ImageSVG';
 
 type CurrencySelectorProps = {
   label: string;
@@ -36,7 +36,7 @@ const CurrencySelector: FunctionComponent<CurrencySelectorProps> = (props) => {
     const dropDownOptions = currencies?.map((currency) => ({
       label: currency,
       value: currency,
-      icon: () => <Flag currency={currency} />,
+      icon: () => <ImageSVG image={currency} />,
     }));
     [];
     setCurrencyOptions(dropDownOptions);

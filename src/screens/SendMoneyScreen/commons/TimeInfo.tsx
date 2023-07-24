@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { FunctionComponent } from 'react';
 import { Route } from '../../../types';
 
-import Thunder from '../../../assets/icons/thunder.svg';
+import ImageSVG from '../../../components/ImageSVG/ImageSVG';
 
 type TimeInfoProps = {
   route: Route;
@@ -20,7 +20,7 @@ const TimeInfo: FunctionComponent<TimeInfoProps> = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.processingTimeContainer}>
-        <Thunder width={20} height={20} />
+        <ImageSVG image={'Thunder'} width={20} height={20} />
         <Text style={styles.timeInfo}>
           {`Processing time - ${processingTime}`}
         </Text>
