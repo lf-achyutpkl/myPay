@@ -68,7 +68,7 @@ const SendMoneyScreen: FunctionComponent<SendMoneyScreenProps> = ({ testID }) =>
       />
       <TimeInfo route={selectedRoute!} />
       <Button
-        testID={`${testID}#currencyAmountSelector_AmountFrom`}
+        testID={`${testID}#button`}
         disabled={!amountTo}
         label='Start transfer'
         onPress={() => {
